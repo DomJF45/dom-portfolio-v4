@@ -4,14 +4,11 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #383634;
-  background-color: #fff8f4;
+  color: hsl(var(--color-text));
+  background-color: hsl(var(--color-bg));
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.home {
 }

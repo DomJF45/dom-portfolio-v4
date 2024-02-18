@@ -1,102 +1,40 @@
 import "./App.css";
-import {
-  AnimatePresence,
-  MotionValue,
-  motion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
-import { useGreeting } from "./hooks/useGreeting";
+import { motion } from "framer-motion";
 import { Navbar } from "./components/navbar/Navbar";
-
-const langs = [
-  {
-    title: "React",
-    icon: "/logos/react.png",
-  },
-  {
-    title: "GO",
-    icon: "/logos/go.png",
-  },
-  {
-    title: "Typescript",
-    icon: "/logos/typescript.png",
-  },
-  {
-    title: "Javascript",
-    icon: "/logos/javascript.png",
-  },
-  {
-    title: "Node.JS",
-    icon: "/logos/nodejs.png",
-  },
-  {
-    title: "Express",
-    icon: "/logos/express.png",
-  },
-];
+import { Intro } from "./views/home/Intro";
+import { About } from "./views/home/About";
+import { WaterGrid } from "./components/shapes/Grid";
+import { useDarkMode } from "./hooks/useDarkMode";
 
 function App() {
-  const [greeting, idx] = useGreeting();
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 700], ["0%", "50%"]);
-
+  useDarkMode();
   return (
     <>
-      <Navbar />
-      <motion.div
-        className="px-20 py-5 flex flex-col gap-5 relative overflow-scroll h-[100vh] w-full"
-        style={{ y }}
-      >
-        <div className="flex flex-row justify-between h-full w-full">
-          <motion.div className="flex flex-col">
-            <AnimatePresence key={idx} mode="wait">
-              <motion.h1
-                className="text-7xl text-[#b5838d]"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-              >
-                {greeting}
-              </motion.h1>
-            </AnimatePresence>
-            <motion.h1 className="text-8xl">
-              <motion.span
-                initial={{ x: 30, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1 }}
-                style={{ display: "inline-block" }}
-              >
-                I'm Dominick
-              </motion.span>
-            </motion.h1>
-            <motion.h1
-              className="text-7xl text-[#b5838d]"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1 }}
-              style={{ y: y }}
-            >
-              a Software Engineer
-            </motion.h1>
-
-            <motion.p className="mt-4">
-              I create full stack web applications
-            </motion.p>
-            <motion.p className="mt-4">Tools:</motion.p>
-            <div className="flex flex-row gap-4">
-              {langs.map((lang) => (
-                <div
-                  key={lang.title}
-                  className="bg-[#38363410] h-[65px] w-[100px] rounded-lg flex flex-row items-center justify-center"
-                >
-                  <img className="w-[40px]" src={lang.icon} />
-                </div>
-              ))}
+      <motion.div className="px-20 py-5 flex flex-col gap-5 relative h-screen">
+        <div className="flex flex-col justify-between h-full w-full sm:flex-row">
+          <motion.div className="flex flex-col relative w-full">
+            <Intro />
+            <div className="absolute top-0 right-0 z-10">
+              <WaterGrid />
             </div>
           </motion.div>
-          <motion.div className="flex flex-row h-[80vh] relative"></motion.div>
+
+          <motion.div className="flex flex-col relative justify-start w-2/4 pl-5">
+            <div className="flex flex-row h-full">
+              <div
+                style={{
+                  background: "hsl(var(--color-primary))",
+                  width: "4px",
+                  height: "100%",
+                  marginRight: "50px",
+                  borderRadius: "10px",
+                }}
+              />
+              <About />
+            </div>
+          </motion.div>
         </div>
+        <Navbar />
       </motion.div>
     </>
   );
