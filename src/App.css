@@ -10,13 +10,16 @@
     --color-text: 30deg 4% 21%;
     --color-text-alt: 215deg 16% 47%;
     --color-accent: 33deg 17% 87%;
+    --color-nav: 285deg 14% 95%;
+    transition: 0.1s ease-in;
   }
   :root[data-theme="dark"] {
     --color-primary: 348deg 25% 48%;
     --color-secondary: 240deg 11% 53%;
-    --color-bg: 30deg 4% 21%;
-    --color-text: 22deg 100%, 98%;
+    --color-bg: 0deg 0% 7%;
+    --color-text: 22deg 100% 98%;
     --color-text-alt: 215deg 20% 65%;
-    --color-accent: 109deg 16% 87%;
+    --color-accent: 33deg 17% 87%;
+    --color-nav: 260deg 4% 14%;
   }
 }

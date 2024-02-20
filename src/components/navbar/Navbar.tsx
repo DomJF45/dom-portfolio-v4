@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Toggle } from "./Toggle";
-
-const tabs = ["Home", "Projects", "Blog", "Contact"];
+import { TABS } from "../../constants";
+import { MoreMenu } from "./Menu";
 
 export const Navbar = () => {
-  const [selected, setSelected] = useState<string>(tabs[0]);
+  const [selected, setSelected] = useState<string>(TABS[0]);
 
   return (
-    <div className="flex flex-row sticky bottom-10 rounded-lg justify-center items-center bottom-0">
-      <div className="flex flex-row px-2 bg-[#12121208] w-max py-2 w-full rounded-lg">
+    <div className="flex flex-row sticky bottom-3 rounded-lg justify-center items-center bottom-0">
+      <div className="flex flex-row px-2 bg-nav w-max py-2 w-full rounded-lg backdrop-blur-md">
         <div className="flex flex-row gap-5 items-center">
-          {tabs.map((tab, index) => (
+          {TABS.map((tab, index) => (
             <Item
               key={index}
               active={selected === tab}
@@ -20,6 +20,7 @@ export const Navbar = () => {
               {tab}
             </Item>
           ))}
+          <MoreMenu />
           <Toggle />
         </div>
       </div>
@@ -29,17 +30,26 @@ export const Navbar = () => {
 
 interface ItemProps extends React.HTMLProps<HTMLAnchorElement> {
   active?: boolean;
+  addStyle?: string;
   children: React.ReactNode;
 }
 
-const Item: React.FC<ItemProps> = ({ active = false, children, ...rest }) => {
+export const Item: React.FC<ItemProps> = ({
+  active = false,
+  addStyle = "",
+  children,
+  ...rest
+}) => {
   const baseStyle =
     "cursor-pointer rounded px-2 py-1 transition-colors relative font-semibold ";
   const activeStyle = `text-white`;
   const inactiveStyle = `bg-none`;
   return (
     <a
-      className={`${baseStyle} + ${active ? activeStyle : inactiveStyle}`}
+      className={[
+        `${baseStyle} + ${active ? activeStyle : inactiveStyle} `,
+        addStyle,
+      ].join(" ")}
       {...rest}
     >
       <span className="relative z-10">{children}</span>

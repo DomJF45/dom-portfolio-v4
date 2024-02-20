@@ -1,7 +1,7 @@
 import anime from "animejs";
 
 const GRID_WIDTH = 25;
-const GRID_HEIGHT = 25;
+const GRID_HEIGHT = 20;
 
 export const WaterGrid = () => {
   // eslint-disable-next-line

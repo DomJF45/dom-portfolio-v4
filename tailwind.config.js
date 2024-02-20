@@ -10,6 +10,7 @@ export default {
         text: "hsl(var(--color-text) / <alpha-value>)",
         "text-alt": "hsl(var(--color-text-alt) / <alpha-value>)",
         accent: "hsl(var(--color-accent) / <alpha-value>)",
+        nav: "hsl(var(--color-nav) / <alpha-value>)",
       },
       textColor: "hsl(var(--color-text) / <alpha-value>)",
     },

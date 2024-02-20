@@ -96,3 +96,44 @@ export const LINKS = [
     at: "webdevbydom[at]gmail.com",
   },
 ];
+
+// TABS
+export const TABS = ["Home", "Projects", "Blog"];
+export const MENU_ITEMS = [
+  {
+    title: "Github",
+    link: GITHUB,
+  },
+  {
+    title: "Read.cv",
+    link: "",
+  },
+];
+
+// Projects
+export const GOMODORO_PNG =
+  "https://ik.imagekit.io/wvlrlc0tr/Portfolio/Gomodoro/gomodorobg.png?updatedAt=1699559387018";
+export const RECIPLS_PNG =
+  "https://ik.imagekit.io/wvlrlc0tr/Portfolio/recipls/recipls-landing.png?updatedAt=1694211315350";
+export const TAROTCAKE_PNG =
+  "https://ik.imagekit.io/wvlrlc0tr/Portfolio/TarotCake/Screenshot_2023-04-03_at_4.30.00_PM.png?updatedAt=1680553892904";
+export const XIV_PNG =
+  "https://ik.imagekit.io/wvlrlc0tr/Portfolio/xiv-minion/xiv-minion?updatedAt=1684348483386";
+export const PROJECT_URLS = [
+  {
+    title: "Gomodoro",
+    img: GOMODORO_PNG,
+  },
+  {
+    title: "Recipls.",
+    img: RECIPLS_PNG,
+  },
+  {
+    title: "TarotCake",
+    img: TAROTCAKE_PNG,
+  },
+  {
+    title: "XIV-Minion-Dex",
+    img: XIV_PNG,
+  },
+];
