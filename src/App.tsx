@@ -4,6 +4,10 @@ import { useDarkMode } from "./hooks/useDarkMode";
 import { Navbar } from "./components/navbar/Navbar";
 import Home from "./views/home";
 import "./App.css";
+import { Projects } from "./views/projects";
+import Blog from "./views/blog";
+import { NotFound } from "./views/NotFound";
+import { ProjectPage } from "./views/projects/ProjectPage";
 
 const WithNav = () => {
   return (
@@ -23,7 +27,20 @@ const router = createBrowserRouter([
         element: <Home />,
         path: "/",
       },
+      {
+        element: <Projects />,
+        path: "/projects",
+      },
+      {
+        element: <ProjectPage />,
+        path: "/projects/:projectID",
+      },
+      {
+        element: <Blog />,
+        path: "/blog",
+      },
     ],
+    errorElement: <NotFound />,
   },
 ]);
 

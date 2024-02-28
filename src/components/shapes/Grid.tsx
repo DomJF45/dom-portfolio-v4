@@ -1,4 +1,5 @@
 import anime from "animejs";
+import { useScreenSize } from "../../hooks/useScreenSize";
 
 const GRID_WIDTH = 25;
 const GRID_HEIGHT = 20;

@@ -16,5 +16,5 @@ export default {
     },
   },
   darkMode: ['data-theme="dark"'],
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")], // eslint-disable-line
 };

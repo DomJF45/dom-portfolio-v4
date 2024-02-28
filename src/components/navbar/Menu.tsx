@@ -30,7 +30,9 @@ export const MoreMenu = () => {
                 <div
                   className={`flex flex-row items-center rounded px-2 cursor-pointer py-1 hover:underline`}
                 >
-                  <a>{item.title}</a>
+                  <a href={item.link} target="_blank">
+                    {item.title}
+                  </a>
                   <PiArrowUpRight />
                 </div>
               )}

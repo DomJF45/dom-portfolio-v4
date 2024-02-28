@@ -2,8 +2,11 @@ import { motion } from "framer-motion";
 import { Intro } from "./Intro";
 import { WaterGrid } from "../../components/shapes/Grid";
 import { About } from "./About";
-import { SwipeCarousel } from "./Projects";
 import { GoPin } from "react-icons/go";
+import { PROJECT_LIST } from "../../constants";
+import { Images, SwipeCarousel } from "../../components/carousel";
+
+const PINNED_PROJECTS = PROJECT_LIST.filter((proj) => proj.pinned);
 
 const Home = () => {
   return (
@@ -27,7 +30,9 @@ const Home = () => {
               <GoPin />
             </span>
           </h1>
-          <SwipeCarousel />
+          <SwipeCarousel imgList={PINNED_PROJECTS}>
+            <Images />
+          </SwipeCarousel>
         </motion.div>
       </motion.div>
       <motion.div className="w-full h-full flex flex-col relative sm:w-2/4 sm:pl-5">
@@ -35,7 +40,7 @@ const Home = () => {
           <div
             className="hidden sm:block h-full"
             style={{
-              background: "hsl(var(--color-primary))",
+              background: "hsl(var(--color-text) / .20)",
               width: "4px",
               marginRight: "50px",
               borderRadius: "10px",

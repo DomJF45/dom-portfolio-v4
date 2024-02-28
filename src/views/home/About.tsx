@@ -1,8 +1,21 @@
 import { motion } from "framer-motion";
-import { ABOUT_ME, DOM_AVATAR, LINKS, NAME, OCCUPATION } from "../../constants";
+import {
+  ABOUT_ME,
+  DOM_AVATAR,
+  LINKS,
+  NAME,
+  OCCUPATION,
+  PROJECT_LIST,
+} from "../../constants";
 import { PiArrowUpRight } from "react-icons/pi";
 import { Greeting } from "../../components/shapes/Greeting";
-import { SwipeCarousel } from "./Projects";
+import { Fragment, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { PiXBold } from "react-icons/pi";
+import { SwipeCarousel, Images } from "../../components/carousel";
+import { TechTile } from "../../components/tags/TechTile";
+
+const PINNED_PROJECTS = PROJECT_LIST.filter((proj) => proj.pinned);
 
 const container = {
   hidden: {
@@ -33,12 +46,7 @@ export const About = () => {
     <div className="flex flex-col gap-5">
       <div className="flex flex-row items-center justify-between gap-4 w-full">
         <div className="flex flex-row items-center gap-4 w-full ">
-          <motion.div
-            className={`rounded-[100%] h-[60px] w-[60px] bg-center bg-cover`}
-            style={{ backgroundImage: `url(${DOM_AVATAR})` }}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-          />
+          <AvModal />{" "}
           <motion.div
             className="flex flex-col"
             variants={container}
@@ -58,7 +66,9 @@ export const About = () => {
         </div>
       </div>
       <div className="flex flex-col overflow-x-hidden sm:hidden">
-        <SwipeCarousel />
+        <SwipeCarousel imgList={PINNED_PROJECTS}>
+          <Images />
+        </SwipeCarousel>
       </div>
       <motion.div
         className="flex flex-col gap-6"
@@ -69,10 +79,22 @@ export const About = () => {
         {ABOUT_ME.map((p) => (
           <motion.div variants={item} key={p.title}>
             <p className="font-bold">{p.title}</p>
-            <p className="text-text-alt ">{p.content}</p>
+            {typeof p.content === "string" ? (
+              <p className="text-text-alt ">{p.content}</p>
+            ) : (
+              <motion.div
+                className="flex items-center gap-3 mt-2"
+                transition={{ staggerChildren: 0.2 }}
+                variants={container}
+              >
+                {p.content.map((lang) => (
+                  <TechTile lang={lang} key={lang.title} size="xl" />
+                ))}
+              </motion.div>
+            )}
           </motion.div>
         ))}
-        <motion.div variants={item}>
+        <motion.div variants={item} className="mb-[40px]">
           <p className="font-bold">Connect</p>
           <div className="text-text-alt">
             {LINKS.map((li) => (
@@ -85,6 +107,7 @@ export const About = () => {
                 <a
                   className="col-span-4 inline-flex items-center hover:underline"
                   href={li.link}
+                  target="_blank"
                 >
                   {li.at}
                   <PiArrowUpRight className="text-sm" />
@@ -95,5 +118,66 @@ export const About = () => {
         </motion.div>
       </motion.div>
     </div>
+  );
+};
+
+const AvModal = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <>
+      <motion.div
+        className={`rounded-[100%] h-[60px] w-[60px] bg-center bg-cover z-30 cursor-pointer`}
+        style={{ backgroundImage: `url(${DOM_AVATAR})` }}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        whileHover={{ scale: 1.2, borderRadius: "8px" }}
+        onClick={openModal}
+      />
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog as="div" className={"relative z-20"} onClose={closeModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/50" onClick={closeModal} />
+          </Transition.Child>
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="relative w-full max-w-md transform overflow-hidden p-6 text-left align-middle shadow-xl transition-all">
+                  <PiXBold
+                    className="absolute top-0 right-0 text-neutral-300 text-2xl hover:brightness-75 cursor-pointer"
+                    onClick={closeModal}
+                  />
+                  <img src={DOM_AVATAR} className="w-full rounded-2xl" />
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+    </>
   );
 };

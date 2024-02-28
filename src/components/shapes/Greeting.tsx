@@ -5,12 +5,13 @@ export const Greeting = () => {
   const [greeting, idx] = useGreeting();
 
   return (
-    <AnimatePresence key={idx} mode="wait">
+    <AnimatePresence mode="wait">
       <motion.h1
+        key={idx}
         className=" text-2xl sm:text-5xl text-primary w-max z-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 20 }}
+        exit={{ opacity: 0, y: -20 }}
       >
         {greeting}!
       </motion.h1>

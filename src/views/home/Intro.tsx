@@ -5,7 +5,7 @@ export const Intro = () => {
   return (
     <>
       <Greeting />
-      <motion.h1 className="sm:text-9xl font-semibold w-max z-20 mt-0 pt-0">
+      <motion.h1 className="sm:text-9xl font-semibold w-max z-20 mt-0 pt-0 2xl:text-[10rem]">
         <motion.span
           initial={{ x: 30, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
