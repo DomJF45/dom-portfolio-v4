@@ -13,7 +13,7 @@ const Images = ({ size = "sm" }: ImagesProps) => {
   const { imgList, imgIndex } = useContext(CarouselContext);
 
   const baseStyle =
-    "aspect-video w-[100%] shrink-0 rounded-md bg-neutral-800 object-cover px-2 py-2";
+    "aspect-video w-full shrink-0 rounded-md bg-neutral-800 object-cover px-2 py-2";
   const sizes = {
     sm: "sm:w-[400px]",
     md: "sm:w-[600px]",

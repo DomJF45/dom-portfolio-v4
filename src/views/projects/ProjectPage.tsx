@@ -20,16 +20,15 @@ export const ProjectPage = () => {
     }
   }, [project, project?.md]);
 
-  console.log(location.pathname);
   return (
     <>
       <div className="flex flex-col items-center">
-        <div className="prose flex flex-col w-1/2">
+        <div className="prose flex flex-col w-full sm:w-1/2">
           <h3 className="font-bold text-text">{project?.title}</h3>
-          <div className="not-prose flex flex-col overflow-x-hidden w-[600px] self-center">
+          <div className="not-prose flex flex-col overflow-x-hidden w-full sm:w-[600px] self-center">
             {project?.imgs ? (
               <SwipeCarousel imgList={project.imgs}>
-                <Images size="md" />
+                <Images size="sm" />
               </SwipeCarousel>
             ) : (
               <img className="aspect-video w-full rounded" src={project?.img} />
